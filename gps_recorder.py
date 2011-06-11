@@ -3,14 +3,15 @@ import android
 import pickle
 import time
 
-def record():
+def record(seconds = 10):
   droid = android.Android()
   droid.startLocating(0, 0)
   # TODO(topher): will need this when not debugging
   # time.sleep(1)
   droid.makeToast("Starting location drill")
   results = []
-  for _ in range(1000):
+  start = time.time()
+  while((time.time() - start) < seconds):
     res = droid.eventWaitFor(u'location', 1000)
     try:
       loc = res.result['gps']
