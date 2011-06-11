@@ -16,7 +16,9 @@ def parse_input():
   print "found {0} unique records".format((len(set(coords))))
   return coords
 
-def plot(coords):
+def plot(coords=None):
+  if (coords == None):
+    coords = parse_input()
   x = [x for x, _ in coords]
   y = [y for _, y in coords]
   pylab.plot(x, y, linewidth=1.0)
