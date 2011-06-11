@@ -5,7 +5,7 @@ import time
 
 def record():
   droid = android.Android()
-  droid.startLocating()
+  droid.startLocating(100, 0)
   time.sleep(1)
   droid.makeToast("Starting location drill")
   results = []
