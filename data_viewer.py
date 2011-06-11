@@ -12,6 +12,8 @@ def parse_input():
   coords = []
   for res in results:
     coords.append((res['latitude'], res['longitude']))
+
+  print "found {0} unique records".format((len(set(coords))))
   return coords
 
 def plot(coords):
