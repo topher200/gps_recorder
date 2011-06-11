@@ -1,5 +1,6 @@
 #!/usr/bin/python2.6
 import pickle
+import pylab
 
 def parse_input():
   try:
@@ -13,3 +14,8 @@ def parse_input():
     coords.append((res['latitude'], res['longitude']))
   return coords
 
+def plot(coords):
+  x = [x for x, _ in coords]
+  y = [y for _, y in coords]
+  pylab.plot(x, y, linewidth=1.0)
+  pylab.show()
