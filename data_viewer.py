@@ -23,3 +23,11 @@ def plot(coords=None):
   y = [y for _, y in coords]
   pylab.plot(x, y, linewidth=1.0)
   pylab.show()
+
+def plot_in_pieces(coords=None, num_steps = 5):
+  if (coords == None):
+    coords = parse_input()
+
+  for i in range(num_steps):
+    step = ((len(coords) / num_steps) * i)
+    plot(coords[:step])
