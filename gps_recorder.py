@@ -5,6 +5,8 @@ import time
 
 def record():
   droid = android.Android()
+  droid.startLocating()
+  time.sleep(1)
   droid.makeToast("Starting location drill")
   results = []
   for _ in range(100):
@@ -12,6 +14,8 @@ def record():
     loc = droid.readLocation().result
     print(loc)
     results.append(loc)
+  droid.stopLocating()
+  droid.makeToast("Recording done, saving")
 
   try:
     f = open('gps_output.txt', 'w')
@@ -19,7 +23,7 @@ def record():
   finally:
     f.close()
 
-  droid.makeToast("Done!")
+  droid.makeToast("All done - exiting!")
 
 if __name__ == '__main__':
   record()
