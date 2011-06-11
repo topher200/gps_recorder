@@ -27,14 +27,3 @@ def record():
 
 if __name__ == '__main__':
   record()
-
-def parse_input():
-  try:
-    f = open('gps_output.txt', 'r')
-    results = pickle.load(f)
-  finally:
-    f.close()
-
-  for res in results:
-    print(res['latitude'] + ' ' + res['longitude'])
-
