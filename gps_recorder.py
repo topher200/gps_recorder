@@ -11,7 +11,11 @@ def record():
   results = []
   for _ in range(100):
     time.sleep(.1)
-    loc = droid.readLocation().result['gps']
+    try:
+      loc = droid.readLocation().result['gps']
+    except KeyError:
+      print("Error: no gps found")
+      continue
     print(loc)
     results.append(loc)
   droid.stopLocating()
