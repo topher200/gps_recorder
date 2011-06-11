@@ -11,7 +11,7 @@ def record():
   results = []
   for _ in range(100):
     time.sleep(.1)
-    loc = droid.readLocation().result
+    loc = droid.readLocation().result['gps']
     print(loc)
     results.append(loc)
   droid.stopLocating()

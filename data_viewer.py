@@ -8,5 +8,8 @@ def parse_input():
   finally:
     f.close()
 
-  print results
+  coords = []
+  for res in results:
+    coords.append((res['latitude'], res['longitude']))
+  return coords
 
