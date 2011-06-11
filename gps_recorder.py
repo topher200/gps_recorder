@@ -6,13 +6,14 @@ import time
 def record():
   droid = android.Android()
   droid.startLocating(0, 0)
-  time.sleep(1)
+  # TODO(topher): will need this when not debugging
+  # time.sleep(1)
   droid.makeToast("Starting location drill")
   results = []
-  for _ in range(100):
-    time.sleep(.1)
+  for _ in range(1000):
+    res = droid.eventWaitFor(u'location', 1000)
     try:
-      loc = droid.readLocation().result['gps']
+      loc = res.result['gps']
     except KeyError:
       print("Error: no gps found")
       continue
