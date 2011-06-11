@@ -14,8 +14,8 @@ def record(seconds = 10):
   while((time.time() - start) < seconds):
     res = droid.eventWaitFor(u'location', 1000)
     try:
-      loc = res.result['gps']
-    except KeyError:
+      loc = res.result['data']['gps']
+    except (KeyError, TypeError):
       print("Error: no gps found")
       continue
     print(loc)

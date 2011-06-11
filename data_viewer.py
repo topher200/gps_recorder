@@ -13,7 +13,8 @@ def parse_input():
   for res in results:
     coords.append((res['latitude'], res['longitude']))
 
-  print "found {0} unique records".format((len(set(coords))))
+  print "found {0} unique records out of {1}".format(
+    len(set(coords)), len(coords))
   return coords
 
 def plot(coords=None):
