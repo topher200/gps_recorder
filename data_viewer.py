@@ -1,17 +1,15 @@
 #!/usr/bin/python2.6
-import pickle
+from __future__ import with_statement
+import json
 import pylab
 
 def parse_input():
-  try:
-    f = open('gps_output.txt', 'r')
-    results = pickle.load(f)
-  finally:
-    f.close()
+  results = []
+  with open('gps_output.txt', 'r') as f:
+    for line in f.readlines():
+      results.append(json.loads(line))
 
-  coords = []
-  for res in results:
-    coords.append((res['latitude'], res['longitude']))
+  coords = [(res['latitude'], res['longitude']) for res in results]
 
   print "found {0} unique records out of {1}".format(
     len(set(coords)), len(coords))
