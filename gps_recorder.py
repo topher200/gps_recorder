@@ -1,21 +1,8 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
+from util import OUTPUT_FILENAME_TEMPLATE, get_last_fileid
 import android
 import json
-import os
-import re
-
-def determine_filename():
-  # Add 1 to the last matching filename we can find.
-  template = 'gps_output_{0}.json'
-  last_id = 0
-  for filename in os.listdir(os.getcwd()):
-    match = re.match(template.format('(\d*)'), filename)
-    try:
-      last_id = int(match.group(1))
-    except AttributeError:
-      pass
-  return template.format(last_id + 1)
 
 def record():
   # Start location messages
@@ -30,7 +17,7 @@ def record():
   droid.dialogShow()
 
   # Loop until the user exits
-  out_filename = determine_filename()
+  out_filename = OUTPUT_FILENAME_TEMPLATE.format(get_last_fileid() + 1)
   with open(out_filename, 'w') as out_file:
     running = True
     while running:
