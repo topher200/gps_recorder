@@ -1,19 +1,11 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
 import json
-import os
 import pylab
-import re
+import util
 
-def get_last_output():
-  files = os.listdir(os.getcwd())
-  last = ''
-  for file in files:
-    if re.match('gps_output', file):
-      last = file
-  return last
-
-def parse_input(filename = get_last_output()):
+def parse_input(fileid = util.get_last_fileid()):
+  filename = util.OUTPUT_FILENAME_TEMPLATE.format(fileid)
   results = []
   with open(filename, 'r') as f:
     for line in f.readlines():
