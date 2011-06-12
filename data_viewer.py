@@ -1,17 +1,27 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
 import json
+import os
 import pylab
+import re
 
-def parse_input():
+def get_last_output():
+  files = os.listdir(os.getcwd())
+  last = ''
+  for file in files:
+    if re.match('gps_output', file):
+      last = file
+  return last
+
+def parse_input(filename = get_last_output()):
   results = []
-  with open('gps_output.txt', 'r') as f:
+  with open(filename, 'r') as f:
     for line in f.readlines():
       results.append(json.loads(line))
 
   coords = [(res['latitude'], res['longitude']) for res in results]
 
-  print "found {0} unique records out of {1}".format(
+  print "found {0} unique records out of {1} total records".format(
     len(set(coords)), len(coords))
   return coords
 
