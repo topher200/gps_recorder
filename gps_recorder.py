@@ -3,7 +3,7 @@ import android
 import pickle
 import time
 
-def record(seconds = 10):
+def record():
   droid = android.Android()
   droid.startLocating(0, 0)
   droid.makeToast("Starting location drill")
