@@ -10,7 +10,7 @@ def determine_filename():
   template = 'gps_output_{0}.json'
   last_id = 0
   for filename in os.listdir(os.getcwd()):
-    match = re.match(template.format('(\d)'), filename)
+    match = re.match(template.format('(\d*)'), filename)
     try:
       last_id = int(match.group(1))
     except AttributeError:
