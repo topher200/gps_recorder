@@ -24,8 +24,9 @@ def record():
   droid.makeToast("Starting location drill")
 
   # Show a dialog box
-  droid.dialogCreateAlert("GPS Recorder running")
-  droid.dialogSetNeutralButtonText("Exit")
+  droid.dialogCreateInput("GPS Recorder running")
+  droid.dialogSetPositiveButtonText("Log message")
+  droid.dialogSetNegativeButtonText("Exit")
   droid.dialogShow()
 
   # Loop until the user exits
@@ -35,24 +36,24 @@ def record():
       res = droid.eventWait(1000).result
       if res == None:
         print "LocationListener timeout"
-        continue
       elif res['name'] == "dialog":
-        # Dialog has been pressed- get out
-        print "User requested exit"
-        running = False
-        continue
+        print "Dialog pressed"
+        if (res[u'data'][u'which'] == u'positive'):
+          # log the message
+          message = '# {0}'.format(res[u'data'][u'value'])
+          print message
+          out_file.write(message)
+        else:
+          print "User requested exit"
+          running = False
       elif res['name'] == "location":
         try:
           loc = res['data']['gps']
         except (KeyError, TypeError):
           print("Location message, but no GPS data")
           continue
-      else:
-        print "I have no idea what kind of message that was"
-        print res
-        continue
-      print(loc)
-      out_file.write(json.dumps(loc) + '\n')
+        print(loc)
+        out_file.write(json.dumps(loc) + '\n')
 
     # Shutdown
     droid.stopLocating()
