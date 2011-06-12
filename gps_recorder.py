@@ -7,7 +7,7 @@ def record():
   droid = android.Android()
   droid.startLocating(0, 0)
   droid.makeToast("Starting location drill")
-  droid.dialogCreateAlert("Exit?")
+  droid.dialogCreateAlert("GPS Recorder running")
   droid.dialogSetNeutralButtonText("Exit")
   droid.dialogShow()
   results = []
