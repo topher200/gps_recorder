@@ -1,17 +1,23 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
 import android
-import configobj
 import json
-import time
+import os
+import re
+
+def determine_filename():
+  # Add 1 to the last matching filename we can find.
+  template = 'gps_output_{0}.json'
+  last_id = 0
+  for filename in os.listdir(os.getcwd()):
+    match = re.match(template.format('(\d)'), filename)
+    try:
+      last_id = int(match.group(1))
+    except AttributeError:
+      pass
+  return template.format(last_id + 1)
 
 def record():
-  # Figure out our output filename
-  config_file = configobj.ConfigObj(config_filename)
-  file_num = config_file['last_id'] + 1
-  config_file['last_id'] = file_num
-  output_filename = 'gps_output_{0}.json'.format(file_num)
-
   # Start location messages
   droid = android.Android()
   droid.startLocating(0, 0)
@@ -23,7 +29,7 @@ def record():
   droid.dialogShow()
 
   # Loop until the user exits
-  with open(output_filename, 'w') as out_file:
+  with open(determine_filename(), 'w') as out_file:
     running = True
     while running:
       res = droid.eventWait(1000).result
