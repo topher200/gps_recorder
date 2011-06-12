@@ -12,7 +12,7 @@ def record(seconds = 10):
   results = []
   start = time.time()
   while((time.time() - start) < seconds):
-    res = droid.eventWaitFor(u'location', 1000)
+    res = droid.eventWait(1000)
     try:
       loc = res.result['data']['gps']
     except (KeyError, TypeError):
