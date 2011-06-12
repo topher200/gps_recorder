@@ -1,6 +1,6 @@
 #!/usr/bin/python2.6
 import android
-import pickle
+import json
 import time
 
 def record():
@@ -39,7 +39,7 @@ def record():
 
   try:
     f = open('gps_output.txt', 'w')
-    pickle.dump(results, f)
+    json.dump(results, f)
   finally:
     f.close()
 
