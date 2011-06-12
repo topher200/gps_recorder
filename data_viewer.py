@@ -17,6 +17,9 @@ def parse_input(filename = get_last_output()):
   results = []
   with open(filename, 'r') as f:
     for line in f.readlines():
+      if line[0] == '#':
+        # this is a comment, skip
+        continue
       results.append(json.loads(line))
 
   coords = [(res['latitude'], res['longitude']) for res in results]
