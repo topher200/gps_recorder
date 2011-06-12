@@ -1,17 +1,29 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
 import android
+import configobj
 import json
 import time
 
 def record():
+  # Figure out our output filename
+  config_file = configobj.ConfigObj(config_filename)
+  file_num = config_file['last_id'] + 1
+  config_file['last_id'] = file_num
+  output_filename = 'gps_output_{0}.json'.format(file_num)
+
+  # Start location messages
   droid = android.Android()
   droid.startLocating(0, 0)
   droid.makeToast("Starting location drill")
+
+  # Show a dialog box
   droid.dialogCreateAlert("GPS Recorder running")
   droid.dialogSetNeutralButtonText("Exit")
   droid.dialogShow()
-  with open('gps_output.txt', 'w') as out_file:
+
+  # Loop until the user exits
+  with open(output_filename, 'w') as out_file:
     running = True
     while running:
       res = droid.eventWait(1000).result
@@ -35,6 +47,8 @@ def record():
         continue
       print(loc)
       out_file.write(json.dumps(loc) + '\n')
+
+    # Shutdown
     droid.stopLocating()
     droid.makeToast("Recording done, saving")
 
