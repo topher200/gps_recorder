@@ -2,7 +2,7 @@
 import os
 import re
 
-OUTPUT_FILENAME_TEMPLATE = 'gps_output_{0}.json'
+OUTPUT_FILENAME_TEMPLATE = 'sensor_output_{0}.json'
 
 def get_last_fileid():
   last_id = 0
