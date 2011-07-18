@@ -40,13 +40,8 @@ def record():
           running = False
       elif res['name'] == "sensors":
         # We've got what we're looking for!
-        try:
-          loc = res['data']['gps']
-        except (KeyError, TypeError):
-          print("Location message, but no GPS data")
-          continue
-        print(loc)
-        out_file.write(json.dumps(loc) + '\n')
+        print(res)
+        out_file.write(json.dumps(res) + '\n')
 
     # Shutdown
     droid.stopLocating()
