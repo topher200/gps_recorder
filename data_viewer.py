@@ -32,6 +32,6 @@ def plot_in_pieces(coords=None, num_steps = 5):
   if (coords == None):
     coords = parse_input()
 
-  for i in range(num_steps):
+  for i in range(1, num_steps+1):
     step = ((len(coords) / num_steps) * i)
     plot(coords[:step])
