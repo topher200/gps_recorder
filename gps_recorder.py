@@ -21,10 +21,12 @@ def record():
   with open(out_filename, 'w') as out_file:
     running = True
     while running:
+      # Wait until we get an event
       res = droid.eventWait(1000).result
       if res == None:
         print "LocationListener timeout"
       elif res['name'] == "dialog":
+        # User used the dialog
         if (res[u'data'][u'which'] == u'positive'):
           droid.makeToast("Saving log message")
           message = '# {0}'.format(res[u'data'][u'value'])
@@ -35,6 +37,7 @@ def record():
           print "User requested exit"
           running = False
       elif res['name'] == "location":
+        # It's a GPS message!
         try:
           loc = res['data']['gps']
         except (KeyError, TypeError):
