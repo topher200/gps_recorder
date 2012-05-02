@@ -1,9 +1,11 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
-from util import OUTPUT_FILENAME_TEMPLATE, get_last_fileid
+from util import get_last_fileid
 import android
 import json
 import time
+
+OUTPUT_FILENAME_TEMPLATE = 'sensor_output_{0}.json'
 
 def record():
   # Start location messages
@@ -26,7 +28,7 @@ def record():
       res = droid.eventWait(1000).result
       print res
       if res == None:
-        print "LocationListener timeout"
+        print "SensorListener timeout"
       elif res['name'] == "dialog":
         # User saving a comment
         if (res[u'data'][u'which'] == u'positive'):

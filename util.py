@@ -2,8 +2,6 @@
 import os
 import re
 
-OUTPUT_FILENAME_TEMPLATE = 'gps_output_{0}.json'
-
 def get_last_fileid():
   last_id = 0
   for filename in os.listdir(os.getcwd()):
