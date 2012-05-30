@@ -1,8 +1,10 @@
 #!/usr/bin/python2.6
 from __future__ import with_statement
-from util import OUTPUT_FILENAME_TEMPLATE, get_last_fileid
+from util import get_last_fileid
 import android
 import json
+
+OUTPUT_FILENAME_TEMPLATE = 'gps_output_{0}.json'
 
 def record():
   # Start location messages
